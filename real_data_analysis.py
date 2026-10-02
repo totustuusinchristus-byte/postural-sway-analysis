@@ -50,12 +50,12 @@ def metrics(x, y, fs):
         "n_samples": len(x),
         "sampling_frequency_hz": fs,
         "duration_s": duration,
-        "path_length": path_length(x, y),
-        "mean_velocity": mean_velocity(x, y, duration),
-        "ml_rms": rms_displacement(x),
-        "ap_rms": rms_displacement(y),
-        "resultant_rms": float(np.sqrt(np.mean((x-x.mean())**2 + (y-y.mean())**2))),
-        "ellipse_area_95": confidence_ellipse_area(x, y),
+        "path_length_mm": path_length(x, y),
+        "mean_velocity_mm_s": mean_velocity(x, y, duration),
+        "ml_rms_mm": rms_displacement(x),
+        "ap_rms_mm": rms_displacement(y),
+        "resultant_rms_mm": float(np.sqrt(np.mean((x-x.mean())**2 + (y-y.mean())**2))),
+        "ellipse_area_95_mm2": confidence_ellipse_area(x, y),
     }
 
 def main():
@@ -75,8 +75,8 @@ def main():
     t = np.arange(len(x)) / fs
     fig, ax = plt.subplots()
     ax.plot(x, y, linewidth=0.8)
-    ax.set_xlabel(f"{xlab}")
-    ax.set_ylabel(f"{ylab}")
+    ax.set_xlabel(f"{xlab} (mm)")
+    ax.set_ylabel(f"{ylab} (mm)")
     ax.set_title(f"HBEDB stabilogram: {args.record}")
     ax.axis("equal")
     fig.tight_layout()
@@ -87,7 +87,7 @@ def main():
     ax.plot(t, x, label=xlab, linewidth=0.8)
     ax.plot(t, y, label=ylab, linewidth=0.8)
     ax.set_xlabel("Time (s)")
-    ax.set_ylabel("Centre of pressure")
+    ax.set_ylabel("Centre of pressure (mm)")
     ax.set_title(f"HBEDB CoP time series: {args.record}")
     ax.legend()
     fig.tight_layout()
