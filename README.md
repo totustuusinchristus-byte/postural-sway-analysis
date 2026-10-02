@@ -44,6 +44,6 @@ Run a record with:
 python real_data_analysis.py --record BDS00001
 ```
 
-The script downloads the selected record through WFDB, identifies documented CoP channels from their labels, computes the project's sway metrics, and saves a stabilogram, CoP time series and metrics table in `real_data_outputs/`. It deliberately fails rather than guessing if two CoP channels cannot be identified.
+The script downloads the selected record through WFDB, identifies documented CoP channels from their labels, computes the project's sway metrics, and saves a stabilogram, CoP time series and metrics table in `real_data_outputs/`. HBEDB documents CoP in centimetres; the script explicitly converts these values to millimetres before calling the repository's metric functions, whose inputs and outputs are defined in millimetres. It deliberately fails rather than guessing if two CoP channels cannot be identified.
 
 **Data provenance:** the source data are not redistributed in this repository. They remain hosted by PhysioNet under the Open Data Commons Attribution License v1.0. Results from the real-data workflow should not be described as validated until the selected record, channel mapping, units and outputs have been inspected.
