@@ -39,7 +39,10 @@ def load_hbedb_record(record: str):
         )
     x = rec.p_signal[:, cop_idx[0]].astype(float)
     y = rec.p_signal[:, cop_idx[1]].astype(float)
-    # PhysioNet documents HBEDB CoP channels in centimetres; the local metric functions use millimetres.\n    x = x * 10.0\n    y = y * 10.0\n    return x, y, float(rec.fs), rec.sig_name[cop_idx[0]], rec.sig_name[cop_idx[1]]
+    # PhysioNet documents HBEDB CoP channels in centimetres; the local metric functions use millimetres.
+    x = x * 10.0
+    y = y * 10.0
+    return x, y, float(rec.fs), rec.sig_name[cop_idx[0]], rec.sig_name[cop_idx[1]]
 
 def metrics(x, y, fs):
     duration = (len(x) - 1) / fs
