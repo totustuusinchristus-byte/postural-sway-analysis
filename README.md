@@ -1,31 +1,36 @@
 # Postural Sway / Centre-of-Pressure Analysis in Python
 
-A learning-oriented project for analysing synthetic force-plate-like centre-of-pressure (CoP) data during quiet standing.
+A reproducible learning project for quantitative analysis of synthetic force-plate-like centre-of-pressure (CoP) data.
 
-## Aim
-Develop a reproducible workflow for visualising CoP trajectories and calculating descriptive sway measures: total path length, mean velocity, mediolateral and anteroposterior RMS displacement, resultant RMS displacement, and covariance-based 95% ellipse area.
+## Scientific question
+How can quiet-standing CoP trajectories be summarized with interpretable spatial and temporal sway metrics across simulated sensory conditions?
 
-## Scope
-The data are synthetic. This repository does not claim force-plate laboratory or clinical balance-assessment experience.
+## Measures
+Total CoP path length, mean CoP velocity, mediolateral (ML) and anteroposterior (AP) RMS displacement, resultant RMS displacement, and covariance-based 95% ellipse area.
 
-## Simulated conditions
-The teaching dataset represents eyes-open/eyes-closed and firm/compliant surface conditions with repeated trials. Differences are intentionally simulated and are not experimental evidence.
+## Reproduce
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python generate_synthetic_data.py
+python analysis.py
+pytest -q
+```
 
-## Tools
-Python, NumPy, pandas, SciPy, Matplotlib and Jupyter.
+## Repository structure
+- `analysis.py` — trial-level metrics, condition summaries and plotting.
+- `generate_synthetic_data.py` — reproducible simulated CoP trajectories.
+- `src/cop_metrics.py` — reusable CoP metric functions.
+- `tests/` — basic automated checks.
+- `LEARNING_GUIDE.md` — concepts and exercises.
+- `.github/workflows/` — automated Python checks.
 
-## Key concepts
-CoP is related to, but not identical to, centre of mass. Sway measures depend on recording duration, sampling and preprocessing, and a larger sway value is not automatically synonymous with worse balance.
+## Skills demonstrated
+Python, NumPy, pandas, Matplotlib, quantitative balance analysis, repeated-trial summaries, reproducibility and basic testing.
 
-## Learning goals
-- visualise ML/AP CoP trajectories;
-- calculate common sway metrics;
-- compare repeated trials;
-- examine sensitivity to recording duration and processing choices;
-- interpret descriptive balance measures cautiously.
+## Interpretation and limitations
+CoP is related to but is not the same as centre of mass. Sway metrics depend on trial duration, sampling and preprocessing, and a larger value is not automatically synonymous with poorer balance. The conditions and differences here are simulated; they are not experimental findings and do **not** claim force-platform laboratory experience.
 
-## Next development
-Complete the notebook sensitivity analysis and later reproduce the workflow with a properly licensed open balance dataset.
-
-## Research integrity
-This repository documents developing computational skills. Synthetic data and guided code are clearly distinguished from experimental research experience.
+## Development goals
+Complete duration/parameter sensitivity analyses and extend the workflow to an appropriately licensed open balance dataset.
